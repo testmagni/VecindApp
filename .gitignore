@@ -1,0 +1,4 @@
+db.sqlite3
+Vecindapp/__pycache__
+apps/users/__pycache__
+apps/users/migrations
