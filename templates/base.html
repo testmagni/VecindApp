@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block head_content %}VecindApp - Login{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static css/bootstrap.min.css%}"">
+    <script src="{% static js/bootstrap.min.js%}"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  </head>
+  <body>
+    {% block content %}
+    {% endblock %}
+    {% block footer %}
+      <!-- Footer -->
+      <footer class="page-footer font-small blue">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+          <a href="https://www.djangoproject.com/"> Powered by Django 2.0</a>
+        </div>
+        <!-- Copyright -->
+
+      </footer>
+      <!-- Footer -->
+    {% endblock%}
+  </body>
+</html>

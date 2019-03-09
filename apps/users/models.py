@@ -1,26 +1,22 @@
 # Import Django User model
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
-class CommonInfo(models.Model):
+class User(AbstractUser):
     phone_number = models.CharField(max_length=25, unique=True, blank=True)
-    ADMIN = 1
+    NOT_DEFINED = 1
     WATCHMAN = 2
     RESIDENT = 3
     ROLE_CHOICES = (
-        (ADMIN, 'Administrador'),
+        (NOT_DEFINED, 'No Definido'),
         (WATCHMAN, 'Celador'),
         (RESIDENT, 'Residente'),
     )
-    user_role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=RESIDENT)
+    user_role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=NOT_DEFINED)
 
 
-    class Meta:
-        abstract = True
-
-
-class Watchman(CommonInfo):
+class Watchman(models.Model):
     """ Define el modelo de Watchman, el cual será una extensión del modelo User
         que hereda de CommonInfo.
     """
@@ -40,7 +36,7 @@ class Watchman(CommonInfo):
         return self.user.first_name + self.user.last_name
 
 
-class Resident(CommonInfo):
+class Resident(models.Model):
     """ Define el modelo de Resident, el cual será una extensión del modelo User
         que hereda de CommonInfo.
     """
