@@ -2,3 +2,7 @@ db.sqlite3
 Vecindapp/__pycache__
 apps/users/__pycache__
 apps/users/migrations
+apps/home/__pycache__
+apps/home/migrations
+.DS_Store
+.scripts/

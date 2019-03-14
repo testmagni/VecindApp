@@ -1,2 +1,14 @@
 {% extends 'base.html' %}
-{% block head_content %}VecindApp - SignUp{% endblock %}
+
+{% block head_content %}VecindApp - Sign Up!{% endblock %}
+
+{% block content %}
+    <form action="{% url 'users:signup' %}" method="POST">
+       {% csrf_token %}
+
+       {{ form.as_p }}
+
+       <button class="btn btn-primary btn-block mt-5" type="submit">Regístrate!</button>
+
+    </form>
+{% endblock %}

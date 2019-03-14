@@ -2,12 +2,12 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib import admin
 
 # Models
-from .models import User, Watchman, Resident
+from .models import User, WatchmanProfile, ResidentProfile
 
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    """ Watchman Admin """
+    """ User Admin """
     list_display = (
         'pk',
         'username',
@@ -17,7 +17,7 @@ class UserAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Watchman)
+@admin.register(WatchmanProfile)
 class WatchmanAdmin(admin.ModelAdmin):
     """ Watchman Admin """
     list_display = (
@@ -27,7 +27,7 @@ class WatchmanAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Resident)
+@admin.register(ResidentProfile)
 class ResidentAdmin(admin.ModelAdmin):
     """ Resident Admin """
     list_display = (

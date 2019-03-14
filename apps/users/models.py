@@ -4,26 +4,26 @@ from django.db import models
 
 # Create your models here.
 class User(AbstractUser):
-    phone_number = models.CharField(max_length=25, unique=True, blank=True)
-    NOT_DEFINED = 1
+    phone_number = models.CharField(max_length=25, blank=True)
+    RESIDENT = 1
     WATCHMAN = 2
-    RESIDENT = 3
+    NOT_DEFINED = 3
     ROLE_CHOICES = (
         (NOT_DEFINED, 'No Definido'),
-        (WATCHMAN, 'Celador'),
+        (WATCHMAN, 'Vigilante'),
         (RESIDENT, 'Residente'),
     )
     user_role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=NOT_DEFINED)
 
 
-class Watchman(models.Model):
+class WatchmanProfile(models.Model):
     """ Define el modelo de Watchman, el cual será una extensión del modelo User
         que hereda de CommonInfo.
     """
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        related_name='user_watchman',
+        related_name='w_profile',
         null=True
     )
     id_num = models.PositiveSmallIntegerField(blank=False, unique=True, null=True)
@@ -36,28 +36,30 @@ class Watchman(models.Model):
         return self.user.first_name + self.user.last_name
 
 
-class Resident(models.Model):
+class ResidentProfile(models.Model):
     """ Define el modelo de Resident, el cual será una extensión del modelo User
         que hereda de CommonInfo.
     """
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        related_name='user_resident',
+        related_name='r_profile',
         null=True,
     )
     OWNER = 1
     TENANT = 2
+    NOT_DEFINED = 3
     RELATION_W_PROPERTY = (
         (OWNER, 'PROPIETARIO'),
-        (TENANT, 'ARRENDATARIO')
+        (TENANT, 'ARRENDATARIO'),
+        (NOT_DEFINED, 'NO DEFINIDO')
     )
     building_num = models.PositiveSmallIntegerField(blank=True, null=True)
     apartment_num = models.PositiveSmallIntegerField(blank=True, null=True)
     parking_lot_num = models.PositiveSmallIntegerField(blank=True, null=True)
     property_relation = models.PositiveSmallIntegerField(
         choices=RELATION_W_PROPERTY,
-        default=TENANT,
+        default=NOT_DEFINED,
         blank=False,
     )
 

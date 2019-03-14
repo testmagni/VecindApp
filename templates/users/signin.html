@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head_content %}VecindApp - Sign In!{% endblock %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <p class="alert alert-danger">
+            Sú usuario y/o contraseña no coinciden. Por favor intente nuevamente.
+        </p>
+    {% endif%}
+
+    <form method="POST" action="{% url "users:login" %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Nombre de Usuario" name="username" />
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" type="password" placeholder="Contraseña" name="password" />
+        </div>
+
+
+        <button class="btn btn-primary btn-block mt-5" type="submit">Ingresar!</button>
+
+    </form>
+
+    <p class="mt-4">¿No tienes una cuenta aún? <a href="{% url "users:signup" %}">Regístrate acá.</a></p>
+
+{% endblock %}
