@@ -12,7 +12,7 @@ class SignUpView(FormView):
     """ Class based view for signup """
     template_name = 'users/signup.html'
     form_class = SignUpForm
-    success_url = reverse_lazy('users:signin')
+    success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
         form.save()

@@ -4,11 +4,20 @@ echo "PROJECT_HOME: ${PROJECT_HOME}"
 echo "PROJECT_SRC: ${PROJECT_SRC}"
 
 # Empty the Sqlite3 DB in order to start from the beginning
-rm -rf $PROJECT_SRC/db.sqlite3
-pushd $PROJECT_SRC/apps/users/migrations > /dev/null
-	rm -rf ./*
-	touch __init__.py
-popd > /dev/null
+
+[[ -f $PROJECT_SRC/db.sqlite3 ]] && rm -rf $PROJECT_SRC/db.sqlite3
+
+if [[ -d $PROJECT_SRC/apps/users/migrations ]]; then
+	pushd $PROJECT_SRC/apps/users/migrations > /dev/null
+		rm -rf ./*
+		touch __init__.py
+	popd > /dev/null
+else
+	mkdir $PROJECT_SRC/apps/users/migrations
+	pushd $PROJECT_SRC/apps/users/migrations > /dev/null
+		touch __init__.py
+	popd
+fi
 
 # Populates the DB with the new changes in models
 pushd $PROJECT_SRC > /dev/null

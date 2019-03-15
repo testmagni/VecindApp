@@ -7,5 +7,5 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def index(request):
     """ class for homepage """
-    print(request.user.user_resident.property_relation)
+    print(request.user.r_profile.property_relation)
     return HttpResponse('Welcome to the homepage {}'.format(request.user.user_role))

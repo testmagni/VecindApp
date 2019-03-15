@@ -76,16 +76,12 @@ class SignUpForm(forms.Form):
         data = self.cleaned_data
         data.pop('password_confirmation')
         user = User.objects.create_user(**data)
+        role_chosen = int(data['user_role'])
 
-        status = True
-        role_chosen = data['user_role']
-        while status:
-            if role_chosen == int:
-                if role_chosen == self.RESIDENT:
-                    res_prof = ResidentProfile(user=user)
-                    res_prof.save()
-                    status = False
-                elif role_chosen == self.WATCHMAN:
-                    wat_prof = WatchmanProfile(user=user)
-                    wat_prof.save()
-                    status = False
+        if role_chosen == self.RESIDENT:
+            print('entré')
+            res_prof = ResidentProfile(user=user)
+            res_prof.save()
+        elif role_chosen == self.WATCHMAN:
+            wat_prof = WatchmanProfile(user=user)
+            wat_prof.save()
