@@ -79,9 +79,16 @@ class SignUpForm(forms.Form):
         role_chosen = int(data['user_role'])
 
         if role_chosen == self.RESIDENT:
-            print('entré')
             res_prof = ResidentProfile(user=user)
             res_prof.save()
         elif role_chosen == self.WATCHMAN:
             wat_prof = WatchmanProfile(user=user)
             wat_prof.save()
+
+
+class ResidentUpdateProfileForm(forms.Form):
+    """ Docstring """
+    building_num = forms.IntegerField(
+        max_value=99999,
+        required=True,
+        label='Número de edificio o torre')

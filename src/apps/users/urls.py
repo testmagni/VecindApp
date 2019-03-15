@@ -20,4 +20,9 @@ urlpatterns = [
         view=views.LogoutView.as_view(),
         name='logout'
     ),
+    path(
+        route = 'update/',
+        view = views.ResidentProfileUpdateView.as_view(),
+        name = 'update'
+    ),
 ]

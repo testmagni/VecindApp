@@ -26,5 +26,10 @@ class LoginView(auth_views.LoginView):
 
 class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
     """Logout view."""
-
     template_name = 'users/logged_out.html'
+
+
+class ResidentProfileUpdate(FormView):
+    """ Update Resident Profile View """
+    template_name = 'users/resident_profile_update.html'
+    form_class = ResidentUpdateProfileForm

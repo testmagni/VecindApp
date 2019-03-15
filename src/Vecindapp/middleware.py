@@ -18,10 +18,10 @@ class ProfileCompletionMiddleware:
         if not request.user.is_anonymous:
             if not request.user.is_staff:
                 if request.user.user_role == 1:
-                    profile = request.user.user_resident
+                    profile = request.user.r_profile
                     if not profile.picture or not profile.biography:
                         if request.path not in [reverse('users:update'), reverse('users:logout')]:
-                            return redirect('users:update')
+                            return redirect('users:update_rprofile')
                 elif request.user.user_role == 2:
                     pass
 
