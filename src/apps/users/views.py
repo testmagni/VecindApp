@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Local Imports
-from .forms import SignUpForm
+from .forms import SignUpForm, ResidentUpdateProfileForm
 
 
 class SignUpView(FormView):
@@ -29,7 +29,7 @@ class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
     template_name = 'users/logged_out.html'
 
 
-class ResidentProfileUpdate(FormView):
+class ResidentProfileUpdateView(FormView):
     """ Update Resident Profile View """
     template_name = 'users/resident_profile_update.html'
     form_class = ResidentUpdateProfileForm

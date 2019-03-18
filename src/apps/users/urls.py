@@ -23,6 +23,6 @@ urlpatterns = [
     path(
         route = 'update/',
         view = views.ResidentProfileUpdateView.as_view(),
-        name = 'update'
+        name = 'update_rprofile'
     ),
 ]

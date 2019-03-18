@@ -19,8 +19,8 @@ class ProfileCompletionMiddleware:
             if not request.user.is_staff:
                 if request.user.user_role == 1:
                     profile = request.user.r_profile
-                    if not profile.picture or not profile.biography:
-                        if request.path not in [reverse('users:update'), reverse('users:logout')]:
+                    if not all((profile.building_num, profile.apartment_num, profile.parking_lot_num, profile.property_relation!=3)):
+                        if request.path not in [reverse('users:update_rprofile'), reverse('users:logout')]:
                             return redirect('users:update_rprofile')
                 elif request.user.user_role == 2:
                     pass
