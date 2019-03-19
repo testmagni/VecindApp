@@ -88,7 +88,31 @@ class SignUpForm(forms.Form):
 
 class ResidentUpdateProfileForm(forms.Form):
     """ Docstring """
+    OWNER = 1
+    TENANT = 2
+    RELATION_W_PROPERTY = (
+        (OWNER, 'PROPIETARIO'),
+        (TENANT, 'ARRENDATARIO'),
+    )
+    property_relation = forms.ChoiceField(
+        choices=RELATION_W_PROPERTY,
+        label='Relación con el immueble.'
+    )
     building_num = forms.IntegerField(
-        max_value=99999,
+        widget=forms.TextInput,
+        max_value=999,
         required=True,
-        label='Número de edificio o torre')
+        label='# Edificio/Torre'
+    )
+    apartment_num = forms.IntegerField(
+        widget=forms.TextInput,
+        max_value=9999,
+        required=True,
+        label='# Apartamento.'
+    )
+    parking_lot_num = forms.IntegerField(
+        widget=forms.TextInput,
+        max_value=99,
+        required=True,
+        label='# Estacionamiento.'
+    )

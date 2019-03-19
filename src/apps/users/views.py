@@ -33,3 +33,4 @@ class ResidentProfileUpdateView(FormView):
     """ Update Resident Profile View """
     template_name = 'users/resident_profile_update.html'
     form_class = ResidentUpdateProfileForm
+    success_url = '/'
