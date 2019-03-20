@@ -68,7 +68,7 @@ class SignUpForm(forms.Form):
         password_confirmation = data['password_confirmation']
 
         if password != password_confirmation:
-            raise forms.ValidationError('Passwords do not match.')
+            raise forms.ValidationError('Las contraseñas no coinciden.')
         return data
 
     def save(self):
@@ -81,12 +81,12 @@ class SignUpForm(forms.Form):
         if role_chosen == self.RESIDENT:
             res_prof = ResidentProfile(user=user)
             res_prof.save()
-        elif role_chosen == self.WATCHMAN:
+        else:
             wat_prof = WatchmanProfile(user=user)
             wat_prof.save()
 
 
-class ResidentUpdateProfileForm(forms.Form):
+class ResidentUpdateProfileForm(forms.ModelForm):
     """ Docstring """
     OWNER = 1
     TENANT = 2
@@ -98,21 +98,6 @@ class ResidentUpdateProfileForm(forms.Form):
         choices=RELATION_W_PROPERTY,
         label='Relación con el immueble.'
     )
-    building_num = forms.IntegerField(
-        widget=forms.TextInput,
-        max_value=999,
-        required=True,
-        label='# Edificio/Torre'
-    )
-    apartment_num = forms.IntegerField(
-        widget=forms.TextInput,
-        max_value=9999,
-        required=True,
-        label='# Apartamento.'
-    )
-    parking_lot_num = forms.IntegerField(
-        widget=forms.TextInput,
-        max_value=99,
-        required=True,
-        label='# Estacionamiento.'
-    )
+    class Meta:
+        model = ResidentProfile
+        exclude = ['user']

@@ -6,13 +6,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Local Imports
 from .forms import SignUpForm, ResidentUpdateProfileForm
+from .models import ResidentProfile
 
 
 class SignUpView(FormView):
     """ Class based view for signup """
     template_name = 'users/signup.html'
     form_class = SignUpForm
-    success_url = reverse_lazy('users:login')
+    success_url = reverse_lazy('user:login')
 
     def form_valid(self, form):
         form.save()
@@ -29,8 +30,13 @@ class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
     template_name = 'users/logged_out.html'
 
 
-class ResidentProfileUpdateView(FormView):
+class ResidentProfileUpdateView(LoginRequiredMixin, UpdateView):
     """ Update Resident Profile View """
     template_name = 'users/resident_profile_update.html'
     form_class = ResidentUpdateProfileForm
-    success_url = '/'
+    model = ResidentProfile
+    success_url = reverse_lazy('home:welcome')
+
+    def get_object(self):
+        """Return user's profile."""
+        return self.request.user.r_profile

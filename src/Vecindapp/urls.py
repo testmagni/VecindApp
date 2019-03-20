@@ -19,6 +19,6 @@ from apps.home import views as home_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', include(('apps.users.urls', 'users'), namespace='users')),
-    path('', home_views.index, name='home'),
+    path('user/', include(('apps.users.urls', 'user'), namespace='user')),
+    path('', include(('apps.home.urls', 'home'), namespace='home')),
 ]
