@@ -43,7 +43,7 @@ class SignUpForm(forms.Form):
         (RESIDENT, 'Residente'),
         (WATCHMAN, 'Vigilante'),
     )
-    user_role = forms.ChoiceField(
+    role = forms.ChoiceField(
         choices=ROLE_CHOICES,
         label='¿Cúal es tú rol?'
     )
@@ -76,7 +76,7 @@ class SignUpForm(forms.Form):
         data = self.cleaned_data
         data.pop('password_confirmation')
         user = User.objects.create_user(**data)
-        role_chosen = int(data['user_role'])
+        role_chosen = int(data['role'])
 
         if role_chosen == self.RESIDENT:
             res_prof = ResidentProfile(user=user)
@@ -86,7 +86,7 @@ class SignUpForm(forms.Form):
             wat_prof.save()
 
 
-class ResidentUpdateProfileForm(forms.ModelForm):
+class ResidentProfileUpdateForm(forms.ModelForm):
     """ Docstring """
     OWNER = 1
     TENANT = 2
@@ -100,4 +100,10 @@ class ResidentUpdateProfileForm(forms.ModelForm):
     )
     class Meta:
         model = ResidentProfile
+        exclude = ['user']
+
+
+class WatchmanProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = WatchmanProfile
         exclude = ['user']

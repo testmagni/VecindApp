@@ -5,8 +5,8 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Local Imports
-from .forms import SignUpForm, ResidentUpdateProfileForm
-from .models import ResidentProfile
+from .forms import SignUpForm, ResidentProfileUpdateForm, WatchmanProfileUpdateForm
+from .models import ResidentProfile, WatchmanProfile
 
 
 class SignUpView(FormView):
@@ -32,11 +32,23 @@ class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
 
 class ResidentProfileUpdateView(LoginRequiredMixin, UpdateView):
     """ Update Resident Profile View """
-    template_name = 'users/resident_profile_update.html'
-    form_class = ResidentUpdateProfileForm
+    template_name = 'users/profile_update.html'
+    form_class = ResidentProfileUpdateForm
     model = ResidentProfile
     success_url = reverse_lazy('home:welcome')
 
     def get_object(self):
         """Return user's profile."""
         return self.request.user.r_profile
+
+
+class WatchmanProfileUpdateView(LoginRequiredMixin, UpdateView):
+    """ Update Resident Profile View """
+    template_name = 'users/profile_update.html'
+    form_class = WatchmanProfileUpdateForm
+    model = WatchmanProfile
+    success_url = reverse_lazy('home:welcome')
+
+    def get_object(self):
+        """Return user's profile."""
+        return self.request.user.w_profile

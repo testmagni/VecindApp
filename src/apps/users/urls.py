@@ -21,8 +21,13 @@ urlpatterns = [
         name='logout'
     ),
     path(
-        route = 'update/',
+        route = 'update/residente',
         view = views.ResidentProfileUpdateView.as_view(),
         name = 'update_rprofile'
+    ),
+    path(
+        route = 'update/vigilante',
+        view = views.WatchmanProfileUpdateView.as_view(),
+        name = 'update_wprofile'
     ),
 ]

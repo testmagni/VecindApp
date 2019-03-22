@@ -13,7 +13,7 @@ class UserAdmin(admin.ModelAdmin):
         'username',
         'phone_number',
         'email',
-        'user_role'
+        'role'
     )
 
 

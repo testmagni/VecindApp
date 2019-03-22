@@ -13,7 +13,7 @@ class User(AbstractUser):
         (WATCHMAN, 'Vigilante'),
         (RESIDENT, 'Residente'),
     )
-    user_role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=NOT_DEFINED)
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=NOT_DEFINED)
 
 
 class WatchmanProfile(models.Model):
