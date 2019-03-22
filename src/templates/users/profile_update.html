@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block head_content %}VecindApp - Profile Update!{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    {% if user.role == 1 %}
+    <form action="{% url 'user:update_rprofile' %}" method="POST">
+    {% elif user.role == 2 %}
+    <form action="{% url 'user:update_wprofile' %}" method="POST">
+    {% endif %}
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary btn-block mt-5" type="submit">Actualizar</button>
+    </form>
+</div>
+{% endblock %}
