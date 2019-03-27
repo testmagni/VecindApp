@@ -52,3 +52,5 @@ pushd $PROJECT_SRC > /dev/null
 	--email $DJ_SUPERUSER_EMAIL \
 	--password $DJ_SUPERUSER_PASSWORD
 popd > /dev/null
+
+# Added extra comment
